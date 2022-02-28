@@ -13,6 +13,8 @@ import sys
 # submit application to gridabld 
 # currently row index 1,5,6,8 isn't active in OpenEI, 3,7  requires more specificaiton, only 0,2,4,9 works
 # check power - line 274
+# add verbose and stuff
+# TODO: catch exception in Jewel's cdoe
 
 df_column_one_name = "Header" # config.csv column one name 
 df_column_two_name = "Value" # config.csv column two name 
@@ -109,7 +111,7 @@ def parse_tariff_name(value, row, df,tariff_index_file):
     elif len(match_list) > 1:
         raise ValueError(f"Found multiple matches for {value}. On success, ignore warning. On failure, please specify from the list below:\n{match_list}")
     else:
-        raise ValueError(f"Could not match {value} with elements in {unique_utility}.")
+        raise ValueError(f"Could not match {value} with elements in {unique_tariff_name}.")
 def parse_tariff_type(value, row, df,tariff_index_file):
     """ Currently not needed and is just a function stub.
     """
@@ -138,6 +140,12 @@ def parse_tariff_region(value, row, df,tariff_index_file):
         raise ValueError(f"Could not match {value} with elements in {unique_tariff_region}.")
 def parse_tariff_inclining_block_rate(value, row, df,tariff_index_file): 
     raise NotImplementedError
+
+def parse_tariff_index_specific(value, row, df, tariff_index_file):
+    if (not value.isdigit()):
+        raise ValueError(f"{value} must be an integer.")
+def parse_verbose(value,row,df,tariff_index_file):
+    verbose = (value == 'True')
 def default(value, row, df,tariff_index_file): 
     """ Handles unsupported values. Raises warning. 
     """
@@ -158,7 +166,8 @@ def parse_csv_values(df,tariff_index_file):
     "TARIFF_NAME": parse_tariff_name,
     "TARIFF_TYPE": parse_tariff_type,
     "TARIFF_REGION":parse_tariff_region,
-    "TARIFF_INCLINING_BLOCK_RATE":parse_tariff_inclining_block_rate
+    "TARIFF_INCLINING_BLOCK_RATE":parse_tariff_inclining_block_rate,
+    "TARIFF_INDEX_SPECIFIC":parse_tariff_index_specific,
     }
     for index, row in df.iterrows():
         df.at[index, df_column_two_name] = row[df_column_two_name].strip()
@@ -178,8 +187,8 @@ def generate_tariff_index(df, df_tariff_index):
     """ Generates tariff index (row number in tariff_config) based on matching values of df (config.csv) and df_tariff_index
     """
     def raise_tariff_index_error():
-        raise ValueError(f"Tariff inputs resulted in no matches. Please replace values TARIFF_UTILITY, TARIFF_REGION, TARIFF_NAME with the closest matches listed below.\n"\
-                + df_tariff_index[["utility","region","name"]].to_string())
+        raise ValueError(f"Tariff inputs did not result in unique value. Please replace values TARIFF_UTILITY, TARIFF_REGION, TARIFF_NAME with the closest matches listed below."\
+                + " Empty list indicates no closest matches.\n" + df_tariff_index[["utility","region","name"]].to_string())
 
     tariff_utility = ""
     tariff_sector = ""
@@ -218,7 +227,7 @@ def generate_tariff_index(df, df_tariff_index):
         df_tariff_index = df_copy
     if (tariff_name != ""):
         df_copy = df_tariff_index.query('name == @tariff_name', inplace = False)
-        if (len(df_copy) == 0 or len(df_copy) > 1):
+        if (len(df_copy) == 0):
             raise_tariff_index_error()
         df_tariff_index = df_copy
 
@@ -234,7 +243,8 @@ def generate_tariff_index(df, df_tariff_index):
     #     print(df_tariff_index.index.get_level_values(0))
     #     return -1 
 
-
+    if (len(df_tariff_index) > 1):
+        raise_tariff_index_error()
     return df_tariff_index.index.tolist()[0]
         
 
@@ -261,7 +271,7 @@ def add_tariff_index_row(df, tariff_index):
 
 def main():
     #gridlabd.set_global("suppress_repeat_messages","FALSE")
-
+    print_verbose(f"Reading {tariff_index_file} file...")
     try:
         df_tariff_index = pd.read_csv(tariff_index_file)
     except FileNotFoundError:
@@ -270,9 +280,9 @@ def main():
     except pd.errors.EmptyDataError:
         gridlabd.error(f"{tariff_index_file} file empty")
         sys.exit(1)
+    print_verbose(f"Read {tariff_index_file} file success.")
 
-    gridlabd.output(f"Reading input {config_file}...")
-
+    print_verbose(f"Reading {config_file} file...")
     try:
         df = pd.read_csv(config_file)
     except FileNotFoundError:
@@ -281,11 +291,21 @@ def main():
     except pd.errors.EmptyDataError:
         gridlabd.error(f"{config_file} file not found")
         sys.exit(1)
+    print_verbose(f"Read {config_file} file success.")
+
 
     try:
+        print_verbose("Checking column names...")
         is_column_names_valid(df)
+        print_verbose("Check column names sucess.")
+
+        print_verbose(f"Parsing {config_file} column values...")
         parse_csv_values(df,df_tariff_index)
+        print_verbose(f"Parse {config_file} column values success")
+
+        print_verbose(f"Generating TARIFF_INDEX...")
         df = add_tariff_index_row(df,generate_tariff_index(df, df_tariff_index))
+        print_verbose(f"TARIFF_INDEX generation success")
     except ValueError as e:
         gridlabd.error(str(e))
         sys.exit(1)
