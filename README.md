@@ -1,7 +1,7 @@
 OpenFIDO Tariff Design pipeline
 ===============================
 
-The `tariff_design` pipeline runs GridLAB-D ICA analysis template.
+The `tariff_design` pipeline runs GridLAB-D tariff_design template.
 
 PIPELINE
 --------
@@ -10,17 +10,17 @@ Recommended pipeline settings:
 
 | Setting                 | Recommended value
 | ----------------------- | -----------------
-| Pipeline name           | GridLAB-D
+| Pipeline name           | Tariff_Design
 | Description             | Run GridLAB-D
 | DockerHub Repository    | slacgismo/gridlabd:latest
 | Git Clone URL (https)   | https://github.com/openfido/tariff_design
-| Repository Branch       | main
+| Repository Branch       | develop-initial
 | Entrypoint Script (.sh) | openfido.sh
 
 INPUTS
 ------
 
-The gridlabd run file `gridlabd.rc` must be uploaded. The format of the RC file is one line per
+The configuration file `config.csv` must be uploaded. The format of the RC file is one line per
 gridlabd command option, e.g., the command `gridlabd --verbose model.glm` should be entered as
 
 ~~~
