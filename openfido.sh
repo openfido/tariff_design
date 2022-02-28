@@ -104,7 +104,7 @@ echo "*** WEATHER STATION UNIQUE MATCH SUCCESS ***"
 # put -t to get template online
 
 echo "Running gridlabd simulation..."
-gridlabd $MODEL_NAME_INPUT tariff_design.glm
+gridlabd $MODEL_NAME_INPUT -t tariff_design
 if [ $OUTPUT_NAME_INPUT != "output.csv" ]; then
   mv output.csv $OUTPUT_NAME_INPUT
 fi
