@@ -17,6 +17,13 @@ set -x
 # later, get the value and put it back
 # gridlabd -D suppress_repeat_messages=FALSE
 
+# configure template 
+gridlabd template config set GITUSER johnsonhsiung
+gridlabd template config set GITREPO openfido-tariff-design
+gridlabd template config set GITBRANCH develop-tariff-design-openfido
+gridlabd template config set DATADIR /model/us/ca/slac
+gridlabd template get tariff_design
+
 echo "OPENFIDO_INPUT = $OPENFIDO_INPUT"
 echo "OPENFIDO_OUTPUT = $OPENFIDO_OUTPUT"
 
