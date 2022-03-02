@@ -8,13 +8,10 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import sys
 # figure out gridlabd warning with gridlabd.set_global 
-# maybe check start time with end time. 
-# try to move stuff to openfido/tariff_design afterwards
 # submit application to gridabld 
 # currently row index 1,5,6,8 isn't active in OpenEI, 3,7  requires more specificaiton, only 0,2,4,9 works
 # check power - line 274
 # add verbose and stuff
-# TODO: catch exception in Jewel's cdoe
 
 df_column_one_name = "Header" # config.csv column one name 
 df_column_two_name = "Value" # config.csv column two name 
