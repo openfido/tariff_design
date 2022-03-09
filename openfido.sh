@@ -110,6 +110,7 @@ if [ $OUTPUT_NAME_INPUT != "output.csv" ]; then
 fi
 
 mv $OUTPUT_NAME_INPUT $OPENFIDO_OUTPUT
+mv *.pdf $OPENFIDO_OUTPUT
 
 echo '*** OUTPUTS ***'
 ls -l $OPENFIDO_OUTPUT
