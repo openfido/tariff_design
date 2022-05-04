@@ -58,7 +58,6 @@ module tape;
 
 #define tariff_index=${TARIFF_INDEX}
 
-// Clock 
 clock {
 	timezone ${TIMEZONE};
 	starttime ${STARTTIME};
@@ -79,7 +78,6 @@ module tape;
 
 #define tariff_index=${TARIFF_INDEX}
 
-// Clock 
 clock {
 	timezone ${TIMEZONE};
 	starttime ${STARTTIME};
@@ -122,7 +120,7 @@ object transformer_configuration {
   	reactance ${REACTANCE};
 }
 
-#for ID in ${RANGE 1, 5}
+#for ID in ${RANGE 1, 20}
 
 object transformer {
 	name transformer_${ID};
@@ -156,7 +154,7 @@ Below is an example of `config.csv`:
 | ----------------------- | -----------------
 | WEATHER_STATION         | CA-San_Francisco_Intl_Ap
 | STARTTIME               | 2020-01-01T00:00:00-00:00
-| STOPTIME                | 2020-01-01T00:00:00-12:00
+| STOPTIME                | 2021-01-15T00:00:00-12:00
 | TIMEZONE                | PST+8PDT
 | MODEL                   | model.glm
 | OUTPUT                  | output.csv
@@ -166,11 +164,17 @@ Below is an example of `config.csv`:
 
 OUTPUTS
 -------
-`output.csv` or the name specified in `OUTPUT` of `config.csv` is generated in the output folder.  It will contain the following data:
-* `Total Charges`: The amount incurred based on the configured simulation in the `Value` column, and the units 
-* `Total Usage`: The electricty consumption in the `Value` column, and the units in `Units` column. 
-* `Total Duration`: The duration of the simulation 
-* `Total Power`: `TODO`
+`output.csv` or the name specified in `OUTPUT` of `config.csv` is generated in the output folder.  It will contain the following data by column:
+* `Meter_ID`: The name of the meter as the index
+* `Date`: The year and month of the row values for a meter. For one row of meter and all triplex meters, values in this column will be `Total`
+* `Cost ($)`: The amount incurred based on the configured simulation
+* `Energy (kWh)`: The electricty consumption 
+* `Peak Power (W)`: The maximum power reached by a triplex meter during simulation duration. Meters do not record this value. 
+
+Three bargraphs (.png) are generated in the output folder for each meter: one for `Cost ($)`, `Energy (kWh)`, and `Peak Power (W)`. The values of each meter for each month during the simulation duration will be plotted. 
+
+Three histograms (.png) are generated in the output folder, plotting the distribution of `Cost ($)`, `Energy (kWh)`, and `Peak Power (W)` across all triplex meters. 
+
 
 SEE ALSO
 -------
