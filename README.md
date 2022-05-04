@@ -165,10 +165,10 @@ Below is an example of `config.csv`:
 OUTPUTS
 -------
 `output.csv` or the name specified in `OUTPUT` of `config.csv` is generated in the output folder.  It will contain the following data by column:
-* `Meter_ID`: The name of the meter as the index
-* `Date`: The year and month of the row values for a meter. For one row of meter and all triplex meters, values in this column will be `Total`
-* `Cost ($)`: The amount incurred based on the configured simulation
-* `Energy (kWh)`: The electricty consumption 
+* `Meter_ID`: The name of the meter as the index.
+* `Date`: The year and month of the row values for a meter. For one row of meter and all triplex meters, values in this column will be `Total`.
+* `Cost ($)`: The amount incurred based on the configured simulation.
+* `Energy (kWh)`: The electricty consumption. 
 * `Peak Power (W)`: The maximum power reached by a triplex meter during simulation duration. Meters do not record this value. 
 
 Three bargraphs (.png) are generated in the output folder for each meter: one for `Cost ($)`, `Energy (kWh)`, and `Peak Power (W)`. The values of each meter for each month during the simulation duration will be plotted. 
