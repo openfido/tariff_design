@@ -33,7 +33,8 @@ The configuration file `config.csv` must be uploaded with the first row as `Head
 * `TARIFF_INDEX_SPECIFIC`: Some tariffs need extra information to simulate. When encountered, provide this field with a corresponding value specified by the error message.
 
 A model file (.glm) must be uploaded as well. Currently, these additional properties for class `meter` must be declared:
-```class meter 
+```
+class meter 
 {
 	string monthly_charges;
 	string monthly_usage;
@@ -43,6 +44,112 @@ A model file (.glm) must be uploaded as well. Currently, these additional proper
 	double monthly_updated_power[W];
 }
 ```
+
+The `model.glm` file also requires various definitions and module declarations:
+
+```
+module powerflow;
+module residential;
+module tape;
+
+#input "config.csv" -f config -t config
+
+#set randomseed=1234
+
+#define tariff_index=${TARIFF_INDEX}
+
+// Clock 
+clock {
+	timezone ${TIMEZONE};
+	starttime ${STARTTIME};
+	stoptime ${STOPTIME};
+}
+
+#input "${WEATHER_STATION}.tmy3"
+```
+An example of a complete `model.glm` file is shown below:
+```
+#input "config.csv" -f config -t config
+
+#set randomseed=1234
+
+#define tariff_index=${TARIFF_INDEX}
+
+// Clock 
+clock {
+	timezone ${TIMEZONE};
+	starttime ${STARTTIME};
+	stoptime ${STOPTIME};
+}
+
+module tape;
+
+#input "${WEATHER_STATION}.tmy3"
+
+module powerflow;
+module residential;
+
+#define PRIMARY_VOLTAGE=4800V
+#define POWER_RATING=500
+#define RESISTANCE=0.011
+#define REACTANCE=0.02
+
+class meter 
+{
+	string monthly_charges;
+	string monthly_usage;
+	string monthly_power;
+	double monthly_updated_charges[$];
+	double monthly_updated_usage[kWh];
+	double monthly_updated_power[W];
+}
+
+object meter
+{
+	bustype "SWING";
+	name "meter_1";	
+	nominal_voltage "4800V";
+	phases "ABCN";
+}
+
+object transformer_configuration {
+	name "transformer_type1";
+	connect_type "SINGLE_PHASE_CENTER_TAPPED";
+  	install_type "PADMOUNT";
+  	power_rating ${POWER_RATING};
+  	primary_voltage ${PRIMARY_VOLTAGE};
+  	secondary_voltage "120V";
+  	resistance ${RESISTANCE};
+  	reactance ${REACTANCE};
+}
+
+#for ID in ${RANGE 1, 5}
+
+object transformer {
+	name transformer_${ID};
+  	phases "AS";
+  	from "meter_1";
+  	to "submeter_${ID}";
+  	configuration "transformer_type1";
+}
+  
+object triplex_meter
+{
+	name "submeter_${ID}";
+	nominal_voltage "120V";
+	phases "AS";
+	object house
+	{
+		floor_area random.triangle(1000,2000);
+		thermal_integrity_level "NORMAL";
+		gas_enduses "WATERHEATER|DRYER|RANGE";
+		heating_system_type "HEAT_PUMP";
+	};
+}
+
+#done
+```
+
 
 Below is an example of `config.csv`:
 
