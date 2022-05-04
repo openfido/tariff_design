@@ -33,7 +33,7 @@ The configuration file `config.csv` must be uploaded with the first row as `Head
 * `TARIFF_INDEX_SPECIFIC`: Some tariffs need extra information to simulate. When encountered, provide this field with a corresponding value specified by the error message.
 
 A model file (.glm) must be uploaded as well. Currently, these additional properties for class `meter` must be declared:
-`class meter 
+```class meter 
 {
 	string monthly_charges;
 	string monthly_usage;
@@ -42,7 +42,7 @@ A model file (.glm) must be uploaded as well. Currently, these additional proper
 	double monthly_updated_usage[kWh];
 	double monthly_updated_power[W];
 }
-`
+```
 
 Below is an example of `config.csv`:
 
