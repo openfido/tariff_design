@@ -32,7 +32,17 @@ The configuration file `config.csv` must be uploaded with the first row as `Head
 * `TARIFF_REGION`: Specifies tariff region. Values must be `Region R`, `REGION P`, `REGION T`, `REGION Z`, `MOUTAIN BASELINE REGION`, `REGION 15`. 
 * `TARIFF_INDEX_SPECIFIC`: Some tariffs need extra information to simulate. When encountered, provide this field with a corresponding value specified by the error message.
 
-A model file (.glm) must be uploaded as well. `TODO`: 
+A model file (.glm) must be uploaded as well. Currently, these additional properties for class `meter` must be declared:
+`class meter 
+{
+	string monthly_charges;
+	string monthly_usage;
+	string monthly_power;
+	double monthly_updated_charges[$];
+	double monthly_updated_usage[kWh];
+	double monthly_updated_power[W];
+}
+`
 
 Below is an example of `config.csv`:
 
