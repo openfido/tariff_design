@@ -69,6 +69,10 @@ clock {
 ```
 An example of a complete `model.glm` file is shown below:
 ```
+module powerflow;
+module residential;
+module tape;
+
 #input "config.csv" -f config -t config
 
 #set randomseed=1234
@@ -82,12 +86,7 @@ clock {
 	stoptime ${STOPTIME};
 }
 
-module tape;
-
 #input "${WEATHER_STATION}.tmy3"
-
-module powerflow;
-module residential;
 
 #define PRIMARY_VOLTAGE=4800V
 #define POWER_RATING=500
