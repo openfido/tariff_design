@@ -1,8 +1,8 @@
 {
   "name" : "Tariff Design",
-  "description" : "GridLAB-D tariff design template",
-  "docker" : "debian:11",
-  "git" : "https://github.com/openfido/tariff_design/tree/main.git",
+  "description" : "Tariff design analysis pipeline",
+  "docker" : "slacgismo/gridlabd:develop",
+  "git" : "https://github.com/openfido/tariff_design.git",
   "branch" : "main",
   "script" : "openfido.sh",
   "manual": {
