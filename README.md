@@ -1,3 +1,5 @@
+Pipeline status: [![validation](https://github.com/openfido/tariff_design/actions/workflows/main.yml/badge.svg)](https://github.com/openfido/tariff_design/actions/workflows/main.yml)
+
 OpenFIDO Tariff Design pipeline
 ===============================
 
