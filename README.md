@@ -14,9 +14,9 @@ Recommended pipeline settings:
 | ----------------------- | -----------------
 | Pipeline name           | Tariff_Design
 | Description             | Run GridLAB-D
-| DockerHub Repository    | slacgismo/gridlabd:latest
+| DockerHub Repository    | slacgismo/gridlabd:develop
 | Git Clone URL (https)   | https://github.com/openfido/tariff_design
-| Repository Branch       | develop-initial
+| Repository Branch       | main
 | Entrypoint Script (.sh) | openfido.sh
 
 INPUTS
@@ -35,28 +35,14 @@ The configuration file `config.csv` must be uploaded with the first row as `Head
 * `TARIFF_INDEX_SPECIFIC`: Some tariffs need extra information to simulate. When encountered, provide this field with a corresponding value specified by the error message.
 
 A model file (.glm) must be uploaded as well. Currently, these additional properties for class `meter` must be declared:
-```
-class meter 
-{
-	string monthly_charges;
-	string monthly_usage;
-	string monthly_power;
-	double monthly_updated_charges[$];
-	double monthly_updated_usage[kWh];
-	double monthly_updated_power[W];
-}
-```
 
-The `model.glm` file also requires various definitions and module declarations:
+The `model.glm` file also requires various definitions and module declarations currently:
 
 ```
 module powerflow;
 module residential;
-module tape;
 
 #input "config.csv" -f config -t config
-
-#set randomseed=1234
 
 #define tariff_index=${TARIFF_INDEX}
 
@@ -72,11 +58,8 @@ An example of a complete `model.glm` file is shown below:
 ```
 module powerflow;
 module residential;
-module tape;
 
 #input "config.csv" -f config -t config
-
-#set randomseed=1234
 
 #define tariff_index=${TARIFF_INDEX}
 
@@ -168,10 +151,11 @@ OUTPUTS
 -------
 `output.csv` or the name specified in `OUTPUT` of `config.csv` is generated in the output folder.  It will contain the following data by column:
 * `Meter_ID`: The name of the meter as the index.
-* `Date`: The year and month of the row values for a meter. For one row of meter and all triplex meters, values in this column will be `Total`.
+* `Date`: The date that row results are sampled. 
+* `Days`: The number of days the row results accumulated. 
 * `Cost ($)`: The amount incurred based on the configured simulation.
 * `Energy (kWh)`: The electricty consumption. 
-* `Peak Power (W)`: The maximum power reached by a triplex meter during simulation duration. Meters do not record this value. 
+* `Peak Power (W)`: The measured demand during simulation duration. 
 
 Three bargraphs (.png) are generated in the output folder for each meter: one for `Cost ($)`, `Energy (kWh)`, and `Peak Power (W)`. The values of each meter for each month during the simulation duration will be plotted. 
 
