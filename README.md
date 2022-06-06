@@ -147,6 +147,18 @@ Below is an example of `config.csv`:
 | TARIFF_NAME             | E-TOU-C3
 | TARIFF_REGION           | Region R
 
+An optional `clock.glm` file can also be uploaded containing a clock object. The clock object must have the following properties:
+* `STARTTIME`: Specifies the starting time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change). 
+* `STOPTIME`: Specifies the ending time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change). 
+* `TIMEZONE`: Specifies time zone of `STARTTIME` and `STOPTIME`. Recommended to use ISO8601 format. No default (subject to change). 
+Note that the same values in `config.csv` must still be provided. However, the `clock.glm` values will be used. Below is an example `clock.glm`:
+```
+clock {
+	timezone "PST+8PDT";
+	starttime "2020-12-08 16:00:00 PST";
+	stoptime "2021-1-09 12:00:00 PST";
+}
+```
 OUTPUTS
 -------
 `output.csv` or the name specified in `OUTPUT` of `config.csv` is generated in the output folder.  It will contain the following data by column:
