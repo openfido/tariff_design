@@ -34,8 +34,6 @@ The configuration file `config.csv` must be uploaded with the first row as `Head
 * `TARIFF_REGION`: Specifies tariff region. Values must be `Region R`, `REGION P`, `REGION T`, `REGION Z`, `MOUTAIN BASELINE REGION`, `REGION 15`. 
 * `TARIFF_INDEX_SPECIFIC`: Some tariffs need extra information to simulate. When encountered, provide this field with a corresponding value specified by the error message.
 
-A model file (.glm) must be uploaded as well. Currently, these additional properties for class `meter` must be declared:
-
 The `model.glm` file also requires various definitions and module declarations currently:
 
 ```
@@ -177,3 +175,4 @@ Three histograms (.png) are generated in the output folder, plotting the distrib
 SEE ALSO
 -------
 * https://docs.gridlabd.us/_page.html?&doc=/GLM/Directive/Clock.md
+* https://github.com/slacgismo/gridlabd-template/edit/add-tariff-design/US/CA/SLAC/tariff_design/tariff_design.md
