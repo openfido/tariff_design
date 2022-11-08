@@ -24,7 +24,8 @@ jobs:
       - name: update
         run: python3 -m pip install -r requirements.txt
       
-      - run: . autotest.sh
+      - name: validate 
+        run: sh ./autotest.sh
         
       - name: artifacts
         uses: actions/upload-artifact@v2
