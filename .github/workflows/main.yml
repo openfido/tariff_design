@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: validate
-        run: sh autotest.sh
+        run: . autotest.sh
         
       - name: artifacts
         uses: actions/upload-artifact@v2
