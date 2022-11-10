@@ -177,6 +177,11 @@ def is_column_names_valid(df):
     """
     print(df)
     if len(df.columns) != 2 or df.columns[0] != df_column_one_name or df.columns[1] != df_column_two_name:
+        print(len(df.columns))
+        print(df.columns[0])
+        print(df_column_one_name)
+        print(df.columns[1])
+        print(df_column_two_name)
         raise ValueError(f"{config_file} column headers must be 'Header' and 'Value'")
     
 
