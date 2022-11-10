@@ -46,8 +46,7 @@ if ! ls -1 $OPENFIDO_INPUT/config.csv; then
   error
 fi
 
-echo "Copying input files to working directory"
-cp -r $OPENFIDO_INPUT/* .
+
 # default values for certain variables
 MODEL_NAME_INPUT="model.glm"
 OUTPUT_NAME_INPUT="output.csv"
@@ -55,6 +54,9 @@ OUTPUT_NAME_INPUT="output.csv"
 # no default values
 WEATHER_STATION=""
 WEATHER_STATION_INDEX_NUMBER=0
+
+echo "Copying input files to working directory"
+cp -r $OPENFIDO_INPUT/* .
 
 python3 -m pip install -r  requirements.txt
 
