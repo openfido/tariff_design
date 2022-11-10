@@ -91,7 +91,7 @@ done < config.csv
 
 # Handle based on weather stations returned 
 if [ $WEATHER_STATION_INDEX_NUMBER -eq 1 ] ; then
-    WEATHER_STATION_PARSED=$(basename ${WEATHER_STATION_LIST}.tmy3)
+    WEATHER_STATION_PARSED=$(basename "$WEATHER_STATION_LIST" .tmy3)
     gawk -i inplace -F ',' '{gsub(find,replace,$2); print}' find="$WEATHER_STATION" replace="$WEATHER_STATION_PARSED" OFS="," config.csv
 elif [ $WEATHER_STATION_INDEX_NUMBER -gt 1 ] ; then
     # printf for more consistent \n
