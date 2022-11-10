@@ -7,7 +7,7 @@
   "script" : "openfido.sh",
   "manual": {
     "config": "csv"
-  }, 
+  },
   "config": {
     "Header": {
       "input_type": "str required",
