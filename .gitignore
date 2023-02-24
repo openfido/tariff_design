@@ -1,4 +1,10 @@
 
 .DS_Store
 autotest/output_*/
+autotest/*/config.csv
+autotest/*/config.glm
 autotest-errors.tar.gz
+*.pyc
+*.json
+*.png
+*.csv
