@@ -11,25 +11,25 @@
   "config": {
     "WEATHER_STATION": {
       "input_type": "str required",
-      "description": "Specifies the weather station for the tariff simulation environment. No default.",
+      "description": "Specifies the weather station for the tariff simulation environment.",
       "default": "CA-San_Jose_Intl_Ap.tmy3",
       "prompt": "Weather Station"
     },
     "STARTTIME":{
       "input_type": "str required",
-      "description": "Specifies the starting time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change).",
+      "description": "Specifies the starting time for the tariff simulation. Recommended to use ISO8601 format.",
       "default": "2023-01-01 00:00:00",
-      "prompt": "Start-time"
+      "prompt": "Start Time"
     },
     "STOPTIME":{
       "input_type": "str required",
-      "description": "Specifies the ending time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change).",
+      "description": "Specifies the ending time for the tariff simulation. Recommended to use ISO8601 format.",
       "default": "2023-03-01 00:00:00",
-      "prompt": "Stop-time"
+      "prompt": "Stop Time"
     },
     "TIMEZONE":{
       "input_type": "str required",
-      "description": "Specifies time zone of STARTTIME and STOPTIME. Recommended to use ISO8601 format. No default (subject to change).",
+      "description": "Specifies time zone of STARTTIME and STOPTIME. Recommended to use ISO8601 format.",
       "default": "PST+8PDT",
       "prompt": "Timezone"
     },
