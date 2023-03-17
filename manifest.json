@@ -9,11 +9,6 @@
     "config": "csv"
   },
   "config": {
-    "Header": {
-      "input_type": "str required",
-      "description": "Headers for csv file",
-      "default": "Value"
-    },
     "WEATHER_STATION": {
       "input_type": "str required",
       "description": "Specifies the weather station for the tariff simulation environment. No default.",
@@ -37,12 +32,6 @@
       "description": "Specifies time zone of STARTTIME and STOPTIME. Recommended to use ISO8601 format. No default (subject to change).",
       "default": "PST+8PDT",
       "prompt": "Timezone"
-    },
-    "MODEL":{
-      "input_type": "str",
-      "description": "Specifies name of model for tariff simulation. File of the same name must be provided as input.",
-      "default": "model.glm",
-      "prompt": "Model"
     },
     "OUTPUT":{
       "input_type": "str",
