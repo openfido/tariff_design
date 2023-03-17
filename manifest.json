@@ -17,7 +17,7 @@
     "WEATHER_STATION": {
       "input_type": "str required",
       "description": "Specifies the weather station for the tariff simulation environment. No default.",
-      "default": "",
+      "default": "CA-San_Jose_Intl_Ap.tmy3",
       "prompt": "Weather Station"
     },
     "STARTTIME":{
