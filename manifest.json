@@ -23,13 +23,13 @@
     "STARTTIME":{
       "input_type": "str required",
       "description": "Specifies the starting time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change).",
-      "default": "2020-07-10 15:00:00",
+      "default": "2023-01-01 00:00:00",
       "prompt": "Start-time"
     },
     "STOPTIME":{
       "input_type": "str required",
       "description": "Specifies the ending time for the tariff simulation. Recommended to use ISO8601 format. No default (subject to change).",
-      "default": "true",
+      "default": "2023-03-01 00:00:00",
       "prompt": "Stop-time"
     },
     "TIMEZONE":{
