@@ -23,7 +23,7 @@ jobs:
         
       - name: update 
         run: |
-          apt-get install python3-pip
+          apt-get install python3-pip -y
           pip install -r requirements.txt
       
       - name: validate 
