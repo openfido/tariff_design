@@ -5,9 +5,7 @@
 
 TEMPLATE=tariff_design
 
-#!/bin/sh
-
-
+trap on_error 1 2 3 4 6 7 8 11 13 14 15
 # nounset: undefined variable outputs error message, and forces an exit
 set -u
 # errexit: abort script at first error
@@ -21,16 +19,16 @@ error()
 {
     echo '*** ABNORMAL TERMINATION ***'
     echo 'See error Console Output stderr for details.'
-    echo "See https://github.com/openfido/loadshape for help"
+    echo "See https://github.com/openfido/tariff_design for help"
     exit 1
 }
 
-# configure template 
-gridlabd template config set GITUSER slacgismo
-gridlabd template config set GITREPO gridlabd-template
-gridlabd template config set GITBRANCH add-tariff-design
-gridlabd template config set DATADIR /model/us/ca/slac
-gridlabd template get tariff_design
+# # configure template 
+# gridlabd template config set GITUSER slacgismo
+# gridlabd template config set GITREPO gridlabd-template
+# gridlabd template config set GITBRANCH add-tariff-design
+# gridlabd template config set DATADIR /model/us/ca/slac
+# gridlabd template get tariff_design
 
 
 echo "OPENFIDO_INPUT = $OPENFIDO_INPUT"
@@ -58,7 +56,7 @@ WEATHER_STATION_INDEX_NUMBER=0
 echo "Copying input files to working directory"
 cp -r $OPENFIDO_INPUT/* .
 
-python3 -m pip install -r  requirements.txt
+pip install -r  requirements.txt
 
 echo "Parsing config.csv..."
 python3 csv_prepare.py 
