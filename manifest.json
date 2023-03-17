@@ -33,6 +33,12 @@
       "default": "PST+8PDT",
       "prompt": "Timezone"
     },
+    "MODEL":{
+     "prompt": "Include model file (glm)",
+      "description": "Feeder model in GLM format. Use CYME2GLM converter to obtain GLM file, if needed.",
+      "default": "",
+      "input_type": "upload"
+    },
     "OUTPUT":{
       "input_type": "str",
       "description": "Specifies name of output file to store results of tariff simulation.",
