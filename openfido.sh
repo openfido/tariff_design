@@ -56,10 +56,10 @@ WEATHER_STATION_INDEX_NUMBER=0
 echo "Copying input files to working directory"
 cp -r $OPENFIDO_INPUT/* .
 
-pip install -r  requirements.txt
+$(gridlabd --version=install)/bin/python3 -m pip install -r  requirements.txt
 
 echo "Parsing config.csv..."
-python3 csv_prepare.py 
+$(gridlabd --version=install)/bin/python3 csv_prepare.py 
 echo "*** CONFIG.CSV PARSING SUCCESS ***"
 
 if [ $? != 0 ]; then
