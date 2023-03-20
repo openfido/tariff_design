@@ -24,10 +24,10 @@ error()
 }
 
 # # configure template 
-# gridlabd template config set GITUSER slacgismo
-# gridlabd template config set GITREPO gridlabd-template
-# gridlabd template config set GITBRANCH add-tariff-design
-# gridlabd template config set DATADIR /model/us/ca/slac
+gridlabd template config set GITUSER slacgismo
+gridlabd template config set GITREPO gridlabd-template
+gridlabd template config set GITBRANCH add-tariff-design
+gridlabd template config set DATADIR /model/us/ca/slac
 # gridlabd template get tariff_design
 
 
@@ -101,7 +101,8 @@ else
 fi
 echo "*** WEATHER STATION UNIQUE MATCH SUCCESS ***"
 
-# put -t to get template online
+echo "Getting tariff design template..."
+gridlabd template get tariff_design
 
 echo "Running gridlabd simulation..."
 if [ -e clock.glm ]; then
