@@ -1,7 +1,7 @@
 {
   "name" : "Tariff Design",
   "description" : "Tariff design analysis pipeline",
-  "docker" : "slacgismo/gridlabd:develop",
+  "docker" : "lfenergy/arras:latest",
   "git" : "https://github.com/openfido/tariff_design.git",
   "branch" : "main",
   "script" : "openfido.sh",
